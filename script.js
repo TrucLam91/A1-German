@@ -633,11 +633,6 @@ function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
 // ── RENDER ──
 function render(){
   document.getElementById('app').innerHTML = navHtml() + pageHtml();
-  // Remove then re-add: always exactly ONE listener, no duplicates
-  document.removeEventListener('click', handleClick);
-  document.removeEventListener('input', handleInput);
-  document.addEventListener('click', handleClick);
-  document.addEventListener('input', handleInput);
 }
 
 function navHtml(){
@@ -948,8 +943,7 @@ function handleClick(e){
   if(!el) return;
   if(el.dataset.speak){speak(decodeURIComponent(el.dataset.speak));return;}
   if(el.dataset.verbopen!==undefined){S.verbOpen[parseInt(el.dataset.verbopen)]=!S.verbOpen[parseInt(el.dataset.verbopen)];// ── INIT ──
-render();
-bindEvents();return;}
+render();return;}
   if(el.dataset.vopen!==undefined){S.vocabOpen[parseInt(el.dataset.vopen)]=!S.vocabOpen[parseInt(el.dataset.vopen)];render();return;}
   if(el.dataset.nav){
     const n=el.dataset.nav;
