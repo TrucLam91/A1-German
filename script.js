@@ -499,17 +499,43 @@ function saveProg(){try{localStorage.setItem('da1p',JSON.stringify(S.progress));
 function saveWrite(){try{localStorage.setItem('da1w',JSON.stringify(S.writing));}catch(e){}}
 
 // ── AUDIO ENGINE ──
+// iOS requires audio to be created synchronously inside a user-gesture handler.
+// We use Web Speech API as primary on mobile, Google TTS as enhancement on desktop.
 const audioCache={};let currentAudio=null;
+
+function isMobile(){return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);}
+
 function speak(text){
   if(!text)return;
   const parts=text.split('___').map(p=>p.trim()).filter(p=>p);
   if(!parts.length)return;
   stopAudio();
-  let i=0;
-  function next(){if(i>=parts.length)return;const p=parts[i++];const onEnd=i<parts.length?()=>setTimeout(next,2000):null;speakPart(p,onEnd);}
-  next();
+  // On mobile: use browser TTS directly (more reliable)
+  // On desktop: try Google TTS first, fallback to browser TTS
+  if(isMobile()){
+    speakPartsWithBrowser(parts,0);
+  } else {
+    speakPartsWithGoogle(parts,0);
+  }
 }
-function stopAudio(){if(currentAudio){currentAudio.pause();currentAudio.currentTime=0;currentAudio=null;}if(window.speechSynthesis)speechSynthesis.cancel();}
+
+function stopAudio(){
+  if(currentAudio){currentAudio.pause();currentAudio.currentTime=0;currentAudio=null;}
+  if(window.speechSynthesis)speechSynthesis.cancel();
+}
+
+function speakPartsWithBrowser(parts,i){
+  if(i>=parts.length)return;
+  const onEnd=i<parts.length-1?()=>setTimeout(()=>speakPartsWithBrowser(parts,i+1),2000):null;
+  useBrowserTTS(parts[i],onEnd);
+}
+
+function speakPartsWithGoogle(parts,i){
+  if(i>=parts.length)return;
+  const onEnd=i<parts.length-1?()=>setTimeout(()=>speakPartsWithGoogle(parts,i+1),2000):null;
+  speakPart(parts[i],onEnd);
+}
+
 function speakPart(text,onEnd){
   try{
     const url=`https://translate.googleapis.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(text)}&tl=de&client=gtx&ttsspeed=0.85`;
@@ -519,17 +545,33 @@ function speakPart(text,onEnd){
     currentAudio=audio;
   }catch(e){useBrowserTTS(text,onEnd);}
 }
+
 let bestGermanVoice=null;
 function loadBestVoice(){
   const voices=speechSynthesis.getVoices();if(!voices.length)return;
-  const priority=[v=>v.lang==='de-DE'&&v.name.includes('Google'),v=>v.lang==='de-DE'&&v.name.includes('Microsoft'),v=>v.lang==='de-DE'&&v.name.includes('Anna'),v=>v.lang==='de-DE',v=>v.lang.startsWith('de')];
+  const priority=[
+    v=>v.lang==='de-DE'&&v.name.includes('Google'),
+    v=>v.lang==='de-DE'&&v.name.includes('Microsoft'),
+    v=>v.lang==='de-DE'&&v.name.includes('Anna'),
+    v=>v.lang==='de-DE',
+    v=>v.lang.startsWith('de'),
+  ];
   for(const test of priority){const found=voices.find(test);if(found){bestGermanVoice=found;break;}}
 }
-if(window.speechSynthesis){speechSynthesis.onvoiceschanged=loadBestVoice;loadBestVoice();}
+if(window.speechSynthesis){
+  speechSynthesis.onvoiceschanged=loadBestVoice;
+  loadBestVoice();
+}
 function useBrowserTTS(text,onEnd){
   if(!window.speechSynthesis)return;
   speechSynthesis.cancel();
-  setTimeout(()=>{const u=new SpeechSynthesisUtterance(text);u.lang='de-DE';u.rate=0.80;u.pitch=1.0;u.volume=1.0;if(bestGermanVoice)u.voice=bestGermanVoice;if(onEnd)u.onend=onEnd;speechSynthesis.speak(u);},100);
+  setTimeout(()=>{
+    const u=new SpeechSynthesisUtterance(text);
+    u.lang='de-DE';u.rate=0.80;u.pitch=1.0;u.volume=1.0;
+    if(bestGermanVoice)u.voice=bestGermanVoice;
+    if(onEnd)u.onend=onEnd;
+    speechSynthesis.speak(u);
+  },100);
 }
 
 // ── HELPERS ──
@@ -589,7 +631,10 @@ function sprechenGroupsHtml(t){
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 
 // ── RENDER ──
-function render(){document.getElementById('app').innerHTML=navHtml()+pageHtml();bindEvents();}
+function render(){
+  document.getElementById('app').innerHTML=navHtml()+pageHtml();
+  // Don't re-bind events here — listeners are attached once at init
+}
 
 function navHtml(){
   const links=[['home','🏠 Home'],['topics','📚 Topics'],['grammar','✏️ Grammar'],['verbs','🔄 Verbs'],['quiz','🏆 Quiz']];
@@ -892,14 +937,20 @@ function quizWidgetHtml(questions,src){
   </div>`;
 }
 
-// ── EVENTS ──
-function bindEvents(){const app=document.getElementById('app');app.addEventListener('click',handleClick);app.addEventListener('input',handleInput);}
+// ── EVENTS — bound ONCE, never inside render() ──
+function bindEvents(){
+  const app=document.getElementById('app');
+  app.addEventListener('click',handleClick);
+  app.addEventListener('input',handleInput);
+}
 
 function handleClick(e){
   const el=e.target.closest('[data-nav],[data-tid],[data-gid],[data-action],[data-skill],[data-pick],[data-ans],[data-speak],[data-verbopen],[data-vopen]');
   if(!el)return;e.stopPropagation();
   if(el.dataset.speak){speak(decodeURIComponent(el.dataset.speak));return;}
-  if(el.dataset.verbopen!==undefined){S.verbOpen[parseInt(el.dataset.verbopen)]=!S.verbOpen[parseInt(el.dataset.verbopen)];render();return;}
+  if(el.dataset.verbopen!==undefined){S.verbOpen[parseInt(el.dataset.verbopen)]=!S.verbOpen[parseInt(el.dataset.verbopen)];// ── INIT — bind events once, then render ──
+render();
+bindEvents();return;}
   if(el.dataset.vopen!==undefined){S.vocabOpen[parseInt(el.dataset.vopen)]=!S.vocabOpen[parseInt(el.dataset.vopen)];render();return;}
   if(el.dataset.nav){
     const n=el.dataset.nav;
