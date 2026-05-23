@@ -605,10 +605,90 @@ const G = [
 ];
 
 // ════════════════════════════════════════
-//  DATA – VERB CONJUGATIONS
-//  Organized by topic · type: regular | irregular | separable | modal
+//  DATA – VERB CONJUGATIONS  (by topic)
+//  type: regular | irregular | separable | modal
 // ════════════════════════════════════════
 const VERBS = [
+  { tid:1, emoji:'👋', title:'Sich vorstellen', color:'#e74c3c', light:'#fdecea', verbs:[
+    { inf:'heißen',   en:'to be called',    type:'regular',        conj:{ich:'heiße',   du:'heißt',    er:'heißt',   wir:'heißen',   ihr:'heißt',   sie:'heißen'   }},
+    { inf:'sein',     en:'to be',           type:'irregular',      conj:{ich:'bin',     du:'bist',     er:'ist',     wir:'sind',     ihr:'seid',    sie:'sind'     }},
+    { inf:'haben',    en:'to have',         type:'irregular',      conj:{ich:'habe',    du:'hast',     er:'hat',     wir:'haben',    ihr:'habt',    sie:'haben'    }},
+    { inf:'kommen',   en:'to come',         type:'regular',        conj:{ich:'komme',   du:'kommst',   er:'kommt',   wir:'kommen',   ihr:'kommt',   sie:'kommen'   }},
+    { inf:'wohnen',   en:'to live',         type:'regular',        conj:{ich:'wohne',   du:'wohnst',   er:'wohnt',   wir:'wohnen',   ihr:'wohnt',   sie:'wohnen'   }},
+    { inf:'sprechen', en:'to speak',        type:'irregular (i)',  conj:{ich:'spreche', du:'sprichst', er:'spricht', wir:'sprechen', ihr:'sprecht', sie:'sprechen' }},
+  ]},
+  { tid:2, emoji:'👨‍👩‍👧‍👦', title:'Familie', color:'#e67e22', light:'#fdf5ec', verbs:[
+    { inf:'sein',      en:'to be',          type:'irregular',      conj:{ich:'bin',      du:'bist',      er:'ist',      wir:'sind',      ihr:'seid',     sie:'sind'      }},
+    { inf:'haben',     en:'to have',        type:'irregular',      conj:{ich:'habe',     du:'hast',      er:'hat',      wir:'haben',     ihr:'habt',     sie:'haben'     }},
+    { inf:'heißen',    en:'to be called',   type:'regular',        conj:{ich:'heiße',    du:'heißt',     er:'heißt',    wir:'heißen',    ihr:'heißt',    sie:'heißen'    }},
+    { inf:'wohnen',    en:'to live',        type:'regular',        conj:{ich:'wohne',    du:'wohnst',    er:'wohnt',    wir:'wohnen',    ihr:'wohnt',    sie:'wohnen'    }},
+    { inf:'studieren', en:'to study (uni)', type:'regular',        conj:{ich:'studiere', du:'studierst', er:'studiert', wir:'studieren', ihr:'studiert', sie:'studieren' }},
+    { inf:'arbeiten',  en:'to work',        type:'regular',        conj:{ich:'arbeite',  du:'arbeitest', er:'arbeitet', wir:'arbeiten',  ihr:'arbeitet', sie:'arbeiten'  }},
+  ]},
+  { tid:3, emoji:'🔢', title:'Zahlen & Datum', color:'#27ae60', light:'#edfaf1', verbs:[
+    { inf:'sein',    en:'to be',                    type:'irregular', conj:{ich:'bin',    du:'bist',    er:'ist',    wir:'sind',    ihr:'seid',    sie:'sind'    }},
+    { inf:'haben',   en:'to have',                  type:'irregular', conj:{ich:'habe',   du:'hast',    er:'hat',    wir:'haben',   ihr:'habt',    sie:'haben'   }},
+    { inf:'kosten',  en:'to cost',                  type:'regular',   conj:{ich:'koste',  du:'kostest', er:'kostet', wir:'kosten',  ihr:'kostet',  sie:'kosten'  }},
+    { inf:'kommen',  en:'to come',                  type:'regular',   conj:{ich:'komme',  du:'kommst',  er:'kommt',  wir:'kommen',  ihr:'kommt',   sie:'kommen'  }},
+    { inf:'werden',  en:'to become / turn (age)',   type:'irregular', conj:{ich:'werde',  du:'wirst',   er:'wird',   wir:'werden',  ihr:'werdet',  sie:'werden'  }},
+  ]},
+  { tid:4, emoji:'🍕', title:'Essen & Trinken', color:'#f39c12', light:'#fefbf0', verbs:[
+    { inf:'essen',   en:'to eat',          type:'irregular (i)', conj:{ich:'esse',   du:'isst',     er:'isst',   wir:'essen',   ihr:'esst',    sie:'essen'   }},
+    { inf:'trinken', en:'to drink',        type:'regular',       conj:{ich:'trinke', du:'trinkst',  er:'trinkt', wir:'trinken', ihr:'trinkt',  sie:'trinken' }},
+    { inf:'kochen',  en:'to cook',         type:'regular',       conj:{ich:'koche',  du:'kochst',   er:'kocht',  wir:'kochen',  ihr:'kocht',   sie:'kochen'  }},
+    { inf:'nehmen',  en:'to take / order', type:'irregular (i)', conj:{ich:'nehme',  du:'nimmst',   er:'nimmt',  wir:'nehmen',  ihr:'nehmt',   sie:'nehmen'  }},
+    { inf:'kosten',  en:'to cost',         type:'regular',       conj:{ich:'koste',  du:'kostest',  er:'kostet', wir:'kosten',  ihr:'kostet',  sie:'kosten'  }},
+    { inf:'möchten', en:'would like to',   type:'modal',         conj:{ich:'möchte', du:'möchtest', er:'möchte', wir:'möchten', ihr:'möchtet', sie:'möchten' }},
+  ]},
+  { tid:5, emoji:'🏠', title:'Wohnen', color:'#1abc9c', light:'#edfaf7', verbs:[
+    { inf:'wohnen', en:'to live',         type:'regular',   conj:{ich:'wohne',  du:'wohnst',  er:'wohnt',  wir:'wohnen',  ihr:'wohnt',  sie:'wohnen'  }},
+    { inf:'leben',  en:'to live / reside',type:'regular',   conj:{ich:'lebe',   du:'lebst',   er:'lebt',   wir:'leben',   ihr:'lebt',   sie:'leben'   }},
+    { inf:'sein',   en:'to be',           type:'irregular', conj:{ich:'bin',    du:'bist',    er:'ist',    wir:'sind',    ihr:'seid',   sie:'sind'    }},
+    { inf:'haben',  en:'to have',         type:'irregular', conj:{ich:'habe',   du:'hast',    er:'hat',    wir:'haben',   ihr:'habt',   sie:'haben'   }},
+    { inf:'kosten', en:'to cost',         type:'regular',   conj:{ich:'koste',  du:'kostest', er:'kostet', wir:'kosten',  ihr:'kostet', sie:'kosten'  }},
+  ]},
+  { tid:6, emoji:'⏰', title:'Alltag & Uhrzeiten', color:'#3498db', light:'#eaf4fd', verbs:[
+    { inf:'aufstehen',   en:'to get up',         type:'separable',      conj:{ich:'stehe auf',   du:'stehst auf',   er:'steht auf',   wir:'stehen auf',   ihr:'steht auf',   sie:'stehen auf'   }},
+    { inf:'frühstücken', en:'to have breakfast', type:'regular',        conj:{ich:'frühstücke',  du:'frühstückst',  er:'frühstückt',  wir:'frühstücken',  ihr:'frühstückt',  sie:'frühstücken'  }},
+    { inf:'arbeiten',    en:'to work',           type:'regular',        conj:{ich:'arbeite',     du:'arbeitest',    er:'arbeitet',    wir:'arbeiten',     ihr:'arbeitet',    sie:'arbeiten'     }},
+    { inf:'schlafen',    en:'to sleep',          type:'irregular (ä)',  conj:{ich:'schlafe',     du:'schläfst',     er:'schläft',     wir:'schlafen',     ihr:'schlaft',     sie:'schlafen'     }},
+    { inf:'fahren',      en:'to drive / go',     type:'irregular (ä)',  conj:{ich:'fahre',       du:'fährst',       er:'fährt',       wir:'fahren',       ihr:'fahrt',       sie:'fahren'       }},
+    { inf:'anrufen',     en:'to call (phone)',   type:'separable',      conj:{ich:'rufe an',     du:'rufst an',     er:'ruft an',     wir:'rufen an',     ihr:'ruft an',     sie:'rufen an'     }},
+  ]},
+  { tid:7, emoji:'⚽', title:'Freizeit & Hobbys', color:'#9b59b6', light:'#f5f0fb', verbs:[
+    { inf:'spielen',   en:'to play',         type:'regular',        conj:{ich:'spiele',   du:'spielst',  er:'spielt',  wir:'spielen',  ihr:'spielt',  sie:'spielen'  }},
+    { inf:'lesen',     en:'to read',         type:'irregular (ie)', conj:{ich:'lese',     du:'liest',    er:'liest',   wir:'lesen',    ihr:'lest',    sie:'lesen'    }},
+    { inf:'sehen',     en:'to see / watch',  type:'irregular (ie)', conj:{ich:'sehe',     du:'siehst',   er:'sieht',   wir:'sehen',    ihr:'seht',    sie:'sehen'    }},
+    { inf:'fernsehen', en:'to watch TV',     type:'separable',      conj:{ich:'sehe fern',du:'siehst fern',er:'sieht fern',wir:'sehen fern',ihr:'seht fern',sie:'sehen fern'}},
+    { inf:'hören',     en:'to listen',       type:'regular',        conj:{ich:'höre',     du:'hörst',    er:'hört',    wir:'hören',    ihr:'hört',    sie:'hören'    }},
+    { inf:'reisen',    en:'to travel',       type:'regular',        conj:{ich:'reise',    du:'reist',    er:'reist',   wir:'reisen',   ihr:'reist',   sie:'reisen'   }},
+    { inf:'können',    en:'can / be able to',type:'modal',          conj:{ich:'kann',     du:'kannst',   er:'kann',    wir:'können',   ihr:'könnt',   sie:'können'   }},
+  ]},
+  { tid:8, emoji:'🛒', title:'Einkaufen', color:'#e91e63', light:'#fdf0f5', verbs:[
+    { inf:'kaufen',   en:'to buy',       type:'regular',       conj:{ich:'kaufe',   du:'kaufst',   er:'kauft',   wir:'kaufen',   ihr:'kauft',   sie:'kaufen'   }},
+    { inf:'bezahlen', en:'to pay',       type:'regular',       conj:{ich:'bezahle', du:'bezahlst', er:'bezahlt', wir:'bezahlen', ihr:'bezahlt', sie:'bezahlen' }},
+    { inf:'kosten',   en:'to cost',      type:'regular',       conj:{ich:'koste',   du:'kostest',  er:'kostet',  wir:'kosten',   ihr:'kostet',  sie:'kosten'   }},
+    { inf:'suchen',   en:'to look for',  type:'regular',       conj:{ich:'suche',   du:'suchst',   er:'sucht',   wir:'suchen',   ihr:'sucht',   sie:'suchen'   }},
+    { inf:'nehmen',   en:'to take',      type:'irregular (i)', conj:{ich:'nehme',   du:'nimmst',   er:'nimmt',   wir:'nehmen',   ihr:'nehmt',   sie:'nehmen'   }},
+    { inf:'brauchen', en:'to need',      type:'regular',       conj:{ich:'brauche', du:'brauchst', er:'braucht', wir:'brauchen', ihr:'braucht', sie:'brauchen' }},
+  ]},
+  { tid:9, emoji:'🚂', title:'Unterwegs', color:'#00bcd4', light:'#e8f9fb', verbs:[
+    { inf:'fahren',   en:'to drive / go',  type:'irregular (ä)', conj:{ich:'fahre',    du:'fährst',   er:'fährt',    wir:'fahren',   ihr:'fahrt',   sie:'fahren'   }},
+    { inf:'gehen',    en:'to go (on foot)',type:'regular',        conj:{ich:'gehe',     du:'gehst',    er:'geht',     wir:'gehen',    ihr:'geht',    sie:'gehen'    }},
+    { inf:'kommen',   en:'to come',        type:'regular',        conj:{ich:'komme',    du:'kommst',   er:'kommt',    wir:'kommen',   ihr:'kommt',   sie:'kommen'   }},
+    { inf:'ankommen', en:'to arrive',      type:'separable',      conj:{ich:'komme an', du:'kommst an',er:'kommt an', wir:'kommen an',ihr:'kommt an',sie:'kommen an'}},
+    { inf:'abfahren', en:'to depart',      type:'separable',      conj:{ich:'fahre ab', du:'fährst ab',er:'fährt ab', wir:'fahren ab',ihr:'fahrt ab',sie:'fahren ab'}},
+    { inf:'abbiegen', en:'to turn',        type:'separable',      conj:{ich:'biege ab', du:'biegst ab',er:'biegt ab', wir:'biegen ab',ihr:'biegt ab',sie:'biegen ab'}},
+  ]},
+  { tid:10, emoji:'🏥', title:'Gesundheit', color:'#ff5722', light:'#fff3f0', verbs:[
+    { inf:'wehtun',  en:'to hurt',            type:'separable',      conj:{ich:'tue weh', du:'tust weh', er:'tut weh', wir:'tun weh', ihr:'tut weh', sie:'tun weh' }},
+    { inf:'fühlen',  en:'to feel',            type:'regular',        conj:{ich:'fühle',   du:'fühlst',   er:'fühlt',   wir:'fühlen',  ihr:'fühlt',   sie:'fühlen'  }},
+    { inf:'bleiben', en:'to stay',            type:'regular',        conj:{ich:'bleibe',  du:'bleibst',  er:'bleibt',  wir:'bleiben', ihr:'bleibt',  sie:'bleiben' }},
+    { inf:'nehmen',  en:'to take (medicine)', type:'irregular (i)',  conj:{ich:'nehme',   du:'nimmst',   er:'nimmt',   wir:'nehmen',  ihr:'nehmt',   sie:'nehmen'  }},
+    { inf:'müssen',  en:'must / have to',     type:'modal',          conj:{ich:'muss',    du:'musst',    er:'muss',    wir:'müssen',  ihr:'müsst',   sie:'müssen'  }},
+    { inf:'gehen',   en:'to go',              type:'regular',        conj:{ich:'gehe',    du:'gehst',    er:'geht',    wir:'gehen',   ihr:'geht',    sie:'gehen'   }},
+  ]},
+];
   {
     cat: '1. Begrüßung & Vorstellung 👋', color: '#e74c3c', light: '#fdecea',
     verbs: [
@@ -925,7 +1005,7 @@ function render() {
 }
 
 function navHtml() {
-  const links = [['home','🏠 Home'],['topics','📚 Topics'],['vocab','📖 Vocab'],['grammar','✏️ Grammar'],['verbs','🔄 Verbs'],['quiz','🏆 Quiz']];
+  const links = [['home','🏠 Home'],['topics','📚 Topics'],['grammar','✏️ Grammar'],['verbs','🔄 Verbs'],['quiz','🏆 Quiz']];
   return `<nav class="nav">
     <span style="color:#FFCE00;font-size:20px;margin-right:8px">🇩🇪</span>
     <span class="nav-title">Deutsch A1</span>
@@ -936,7 +1016,7 @@ function navHtml() {
 function pageHtml() {
   if (S.topic)   return topicDetailHtml();
   if (S.grammar) return grammarDetailHtml();
-  const pages = { home: homeHtml, topics: topicsHtml, vocab: vocabPageHtml, grammar: grammarHtml, verbs: verbsHtml, quiz: quizPageHtml };
+  const pages = { home: homeHtml, topics: topicsHtml, grammar: grammarHtml, verbs: verbsHtml, quiz: quizPageHtml };
   return (pages[S.page] || homeHtml)();
 }
 
@@ -1274,9 +1354,71 @@ function vocabPageHtml() {
 }
 
 // ════════════════════════════════════════
-//  PAGE: VERB CONJUGATIONS
+//  PAGE: VERB CONJUGATIONS  (accordion by topic)
 // ════════════════════════════════════════
 function verbsHtml() {
+  if (!S.verbOpen) S.verbOpen = {};
+  const pronouns   = ['ich','du','er/sie/es','wir','ihr','sie/Sie'];
+  const keys       = ['ich','du','er','wir','ihr','sie'];
+  const typeColors = { regular:'#78909c', irregular:'#e67e22', separable:'#3498db', modal:'#9b59b6' };
+  const badge = t => {
+    const col = Object.entries(typeColors).find(([k]) => t.startsWith(k))?.[1] || '#78909c';
+    return `<span style="background:${col};color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:500;white-space:nowrap">${esc(t)}</span>`;
+  };
+
+  return `<div class="page">
+    <div style="padding-top:16px;margin-bottom:16px">
+      <h2 style="margin-bottom:4px">🔄 Verb Conjugations – Present Tense</h2>
+      <p style="color:#666;font-size:13px;margin-bottom:10px">10 topics · Click a topic to expand · Press 🔊 to listen</p>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        ${Object.entries(typeColors).map(([t,c])=>`<span style="background:${c};color:#fff;border-radius:4px;padding:3px 9px;font-size:11px">${t}</span>`).join('')}
+      </div>
+    </div>
+
+    ${VERBS.map(topic => {
+      const open = !!S.verbOpen[topic.tid];
+      return `
+        <div style="margin-bottom:10px;border-radius:12px;overflow:hidden;border:1.5px solid ${open ? topic.color : '#e0e0e0'}">
+
+          <!-- Topic header -->
+          <button data-verbopen="${topic.tid}" style="width:100%;background:${open ? topic.color : '#fff'};border:none;padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:12px;text-align:left">
+            <div style="width:44px;height:44px;border-radius:10px;background:${open ? 'rgba(255,255,255,.2)' : topic.light};display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0">${topic.emoji}</div>
+            <div style="flex:1">
+              <div style="font-size:15px;font-weight:600;color:${open ? '#fff' : '#111'}">${esc(topic.title)}</div>
+              <div style="font-size:12px;color:${open ? 'rgba(255,255,255,.8)' : '#888'};margin-top:2px">${topic.verbs.length} verbs</div>
+            </div>
+            <span style="font-size:18px;color:${open ? '#fff' : '#bbb'};display:inline-block;transform:rotate(${open?180:0}deg);transition:transform .2s">▼</span>
+          </button>
+
+          <!-- Conjugation tables -->
+          ${open ? `<div style="background:#fff;border-top:1px solid ${topic.color}33">
+            ${topic.verbs.map((v, vi) => `
+              <div style="padding:14px 16px;${vi < topic.verbs.length-1 ? `border-bottom:1px solid ${topic.color}22` : ''}">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap">
+                  <span style="font-size:17px;font-weight:700;color:#111">${esc(v.inf)}</span>
+                  <button class="spk" data-speak="${encodeURIComponent(v.inf)}" style="font-size:15px">🔊</button>
+                  <span style="font-size:13px;color:#777;font-style:italic">${esc(v.en)}</span>
+                  <span style="margin-left:auto">${badge(v.type)}</span>
+                </div>
+                <div style="border-radius:8px;overflow:hidden;border:1px solid #eee">
+                  ${pronouns.map((pr, i) => {
+                    const form = v.conj[keys[i]];
+                    const bg = i%2===0 ? '#fff' : '#fafafa';
+                    return `<div style="display:grid;grid-template-columns:110px 1fr 36px;background:${bg};border-bottom:${i<5?'1px solid #f0f0f0':'none'}">
+                      <div style="padding:8px 12px;font-size:13px;color:#666;border-right:1px solid #f0f0f0">${esc(pr)}</div>
+                      <div style="padding:8px 12px;font-size:15px;font-weight:600;color:${topic.color}">${esc(form)}</div>
+                      <div style="padding:6px 4px;display:flex;align-items:center;justify-content:center">
+                        <button class="spk" data-speak="${encodeURIComponent(pr.split('/')[0].trim()+' '+form)}" style="font-size:14px">🔊</button>
+                      </div>
+                    </div>`;
+                  }).join('')}
+                </div>
+              </div>`).join('')}
+          </div>` : ''}
+        </div>`;
+    }).join('')}
+  </div>`;
+}
   const pronouns = ['ich','du','er/sie/es','wir','ihr','sie/Sie'];
   const keys     = ['ich','du','er','wir','ihr','sie'];
   const typeColors = {
@@ -1395,6 +1537,12 @@ function handleClick(e) {
   }
   if (el.dataset.tid) { S.topic=T.find(t=>t.id==el.dataset.tid); S.skill='vocab'; S.fc={idx:0,flipped:false}; S.quiz={questions:[],idx:0,sel:null,score:0,done:false,final:0,src:null}; render(); return; }
   if (el.dataset.gid) { S.grammar=G.find(g=>g.id==el.dataset.gid); S.quiz={questions:[],idx:0,sel:null,score:0,done:false,final:0,src:null}; render(); return; }
+  if (el.dataset.verbopen !== undefined) {
+    if (!S.verbOpen) S.verbOpen = {};
+    const id = parseInt(el.dataset.verbopen);
+    S.verbOpen[id] = !S.verbOpen[id];
+    render(); return;
+  }
   if (el.dataset.vopen !== undefined) {
     const id = parseInt(el.dataset.vopen);
     S.vocabOpen[id] = !S.vocabOpen[id];
