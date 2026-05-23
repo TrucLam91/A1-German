@@ -548,14 +548,75 @@ function saveProg()  { try { localStorage.setItem('da1p', JSON.stringify(S.progr
 function saveWrite() { try { localStorage.setItem('da1w', JSON.stringify(S.writing));  } catch (e) {} }
 
 // ════════════════════════════════════════
-//  HELPERS
+//  AUDIO ENGINE
+//  Priority: Google TTS → Best browser voice → Fallback
 // ════════════════════════════════════════
+const audioCache = {};
+let currentAudio = null;
+
 function speak(text) {
+  if (!text) return;
+  stopAudio();
+  if (useGoogleTTS(text)) return;
+  useBrowserTTS(text);
+}
+
+function stopAudio() {
+  if (currentAudio) { currentAudio.pause(); currentAudio.currentTime = 0; currentAudio = null; }
+  if (window.speechSynthesis) speechSynthesis.cancel();
+}
+
+function useGoogleTTS(text) {
+  try {
+    const url = `https://translate.googleapis.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(text)}&tl=de&client=gtx&ttsspeed=0.85`;
+    if (audioCache[text]) {
+      currentAudio = audioCache[text];
+      currentAudio.currentTime = 0;
+      currentAudio.play().catch(() => useBrowserTTS(text));
+      return true;
+    }
+    const audio = new Audio(url);
+    audio.volume = 1.0;
+    audio.addEventListener('canplaythrough', () => { audioCache[text] = audio; });
+    audio.play().catch(() => useBrowserTTS(text));
+    currentAudio = audio;
+    return true;
+  } catch (e) { return false; }
+}
+
+let bestGermanVoice = null;
+
+function loadBestVoice() {
+  const voices = speechSynthesis.getVoices();
+  if (!voices.length) return;
+  const priority = [
+    v => v.lang === 'de-DE' && v.name.includes('Google'),
+    v => v.lang === 'de-DE' && v.name.includes('Microsoft'),
+    v => v.lang === 'de-DE' && v.name.includes('Anna'),
+    v => v.lang === 'de-DE' && v.name.includes('Deutsch'),
+    v => v.lang === 'de-DE',
+    v => v.lang.startsWith('de'),
+  ];
+  for (const test of priority) {
+    const found = voices.find(test);
+    if (found) { bestGermanVoice = found; break; }
+  }
+}
+
+if (window.speechSynthesis) {
+  speechSynthesis.onvoiceschanged = loadBestVoice;
+  loadBestVoice();
+}
+
+function useBrowserTTS(text) {
   if (!window.speechSynthesis) return;
   speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = 'de-DE'; u.rate = 0.82;
-  speechSynthesis.speak(u);
+  setTimeout(() => {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'de-DE'; u.rate = 0.80; u.pitch = 1.0; u.volume = 1.0;
+    if (bestGermanVoice) u.voice = bestGermanVoice;
+    speechSynthesis.speak(u);
+  }, 100);
 }
 
 function esc(s) {
