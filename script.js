@@ -557,8 +557,33 @@ let currentAudio = null;
 function speak(text) {
   if (!text) return;
   stopAudio();
-  if (useGoogleTTS(text)) return;
-  useBrowserTTS(text);
+
+  // Split on ___ → speak each part with a 2s pause in between
+  const parts = text.split('___').map(p => p.trim()).filter(p => p);
+  if (!parts.length) return;
+
+  let i = 0;
+  function speakNext() {
+    if (i >= parts.length) return;
+    const part = parts[i++];
+    const onEnd = i < parts.length ? () => setTimeout(speakNext, 2000) : null;
+    speakPart(part, onEnd);
+  }
+  speakNext();
+}
+
+function speakPart(text, onEnd) {
+  // Try Google TTS
+  try {
+    const url = `https://translate.googleapis.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(text)}&tl=de&client=gtx&ttsspeed=0.85`;
+    const audio = new Audio(url);
+    audio.volume = 1.0;
+    if (onEnd) audio.addEventListener('ended', onEnd);
+    audio.play().catch(() => useBrowserTTS(text, onEnd));
+    currentAudio = audio;
+  } catch (e) {
+    useBrowserTTS(text, onEnd);
+  }
 }
 
 function stopAudio() {
@@ -608,13 +633,14 @@ if (window.speechSynthesis) {
   loadBestVoice();
 }
 
-function useBrowserTTS(text) {
+function useBrowserTTS(text, onEnd) {
   if (!window.speechSynthesis) return;
   speechSynthesis.cancel();
   setTimeout(() => {
     const u = new SpeechSynthesisUtterance(text);
     u.lang = 'de-DE'; u.rate = 0.80; u.pitch = 1.0; u.volume = 1.0;
     if (bestGermanVoice) u.voice = bestGermanVoice;
+    if (onEnd) u.onend = onEnd;
     speechSynthesis.speak(u);
   }, 100);
 }
