@@ -633,6 +633,11 @@ function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
 // ── RENDER ──
 function render(){
   document.getElementById('app').innerHTML = navHtml() + pageHtml();
+  // Remove then re-add: always exactly ONE listener, no duplicates
+  document.removeEventListener('click', handleClick);
+  document.removeEventListener('input', handleInput);
+  document.addEventListener('click', handleClick);
+  document.addEventListener('input', handleInput);
 }
 
 function navHtml(){
@@ -936,19 +941,11 @@ function quizWidgetHtml(questions,src){
   </div>`;
 }
 
-// ── EVENTS — attached to document once, survives all re-renders ──
-let _eventsBound = false;
-function bindEvents(){
-  if (_eventsBound) return;
-  _eventsBound = true;
-  document.addEventListener('click', handleClick);
-  document.addEventListener('input', handleInput);
-}
-
+// ── EVENTS ──
 function handleClick(e){
-  const el=e.target.closest('[data-nav],[data-tid],[data-gid],[data-action],[data-skill],[data-pick],[data-ans],[data-speak],[data-verbopen],[data-vopen]');
-  if(!el)return;
-  // Note: no stopPropagation — causes issues on mobile document-level listeners
+  if(!e.target || typeof e.target.closest !== 'function') return;
+  const el = e.target.closest('[data-nav],[data-tid],[data-gid],[data-action],[data-skill],[data-pick],[data-ans],[data-speak],[data-verbopen],[data-vopen]');
+  if(!el) return;
   if(el.dataset.speak){speak(decodeURIComponent(el.dataset.speak));return;}
   if(el.dataset.verbopen!==undefined){S.verbOpen[parseInt(el.dataset.verbopen)]=!S.verbOpen[parseInt(el.dataset.verbopen)];// ── INIT ──
 render();
