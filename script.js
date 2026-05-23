@@ -619,6 +619,19 @@ function useBrowserTTS(text) {
   }, 100);
 }
 
+// Parse "die Familie (-n)" → { sg: "die Familie", pl: "die Familien" }
+// Returns null for verbs / adjectives / phrases (no article prefix)
+function parseSgPl(de) {
+  const m = de.match(/^(der|die|das)\s+(\S+)\s+\((.+)\)$/);
+  if (!m) return null;
+  const [, art, noun, info] = m;
+  // info can be: "-" (same), "-n"/"-e"/"-er"/"-en"/"-s" (add suffix), or full word "Väter"
+  const plNoun = info === '-' ? noun
+               : info.startsWith('-') ? noun + info.slice(1)
+               : info; // full form given e.g. Väter, Häuser
+  return { sg: `${art} ${noun}`, pl: `die ${plNoun}` };
+}
+
 function esc(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
@@ -760,12 +773,27 @@ function vocabHtml(t) {
     <div style="background:${t.light};border-radius:12px;padding:16px;margin-bottom:16px">
       <h3 style="color:${t.color};margin-bottom:12px">🃏 Flashcards – Tap to flip!</h3>
       <div class="flashcard${fc.flipped?' flip':''}" data-action="flip">
-        ${!fc.flipped?`
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-size:22px;font-weight:600">${esc(card.de)}</span><button class="spk" data-speak="${encodeURIComponent(card.de)}" style="font-size:18px">🔊</button></div>
-          <div style="font-size:12px;color:#666">Tap to flip</div>`:`
-          <div style="font-size:16px;color:#666;margin-bottom:6px">${esc(card.vi)}</div>
-          <div style="font-size:14px;color:#555;font-style:italic;margin-bottom:8px">"${esc(card.ex)}"</div>
-          <button class="spk" data-speak="${encodeURIComponent(card.ex)}" style="font-size:15px">🔊 Example</button>`}
+        ${!fc.flipped ? (() => {
+            const p = parseSgPl(card.de);
+            return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+              <span style="font-size:22px;font-weight:600">${p ? p.sg : esc(card.de)}</span>
+              <button class="spk" data-speak="${encodeURIComponent(p ? p.sg : card.de)}" style="font-size:18px">🔊</button>
+            </div>
+            ${p ? `<div style="display:flex;gap:10px;margin-bottom:6px">
+              <span style="background:#e8f4fd;border-radius:6px;padding:3px 8px;font-size:12px;color:#2980b9">SG: ${esc(p.sg)}</span>
+              <span style="background:#edfaf1;border-radius:6px;padding:3px 8px;font-size:12px;color:#1a9e5f">PL: ${esc(p.pl)}</span>
+            </div>` : ''}
+            <div style="font-size:12px;color:#666">Tap to flip</div>`;
+          })() : (() => {
+            const p = parseSgPl(card.de);
+            return `<div style="font-size:16px;color:#555;font-weight:500;margin-bottom:8px">${esc(card.vi)}</div>
+            ${p ? `<div style="display:flex;gap:8px;justify-content:center;margin-bottom:8px;flex-wrap:wrap">
+              <span style="background:#e8f4fd;border-radius:6px;padding:4px 10px;font-size:13px;color:#2980b9;font-weight:500">📌 SG: ${esc(p.sg)}</span>
+              <span style="background:#edfaf1;border-radius:6px;padding:4px 10px;font-size:13px;color:#1a9e5f;font-weight:500">📌 PL: ${esc(p.pl)}</span>
+            </div>` : ''}
+            <div style="font-size:13px;color:#888;font-style:italic;margin-bottom:8px">"${esc(card.ex)}"</div>
+            <button class="spk" data-speak="${encodeURIComponent(card.ex)}" style="font-size:15px">🔊 Example</button>`;
+          })()}
       </div>
       <div class="fcnav">
         <button class="smb" data-action="fc-prev">←</button>
@@ -774,12 +802,21 @@ function vocabHtml(t) {
       </div>
     </div>
     <h3 style="font-size:14px;color:#555;margin-bottom:10px">📋 All Vocabulary</h3>
-    ${t.vocab.map(v=>`
-      <div class="vi"><div style="flex:1">
-        <div style="display:flex;align-items:center;gap:6px"><span style="font-weight:500;font-size:15px">${esc(v.de)}</span><button class="spk" data-speak="${encodeURIComponent(v.de)}">🔊</button></div>
-        <div style="font-size:12px;color:#666">${esc(v.vi)}</div>
-        <div style="font-size:12px;color:#888;font-style:italic;margin-top:2px">${esc(v.ex)}</div>
-      </div></div>`).join('')}`;
+    ${t.vocab.map(v => {
+      const p = parseSgPl(v.de);
+      return `<div class="vi"><div style="flex:1">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
+          <span style="font-weight:600;font-size:15px">${p ? p.sg : esc(v.de)}</span>
+          <button class="spk" data-speak="${encodeURIComponent(p ? p.sg : v.de)}">🔊</button>
+        </div>
+        ${p ? `<div style="display:flex;gap:6px;margin-bottom:4px;flex-wrap:wrap">
+          <span style="background:#e8f4fd;border-radius:5px;padding:2px 7px;font-size:12px;color:#2980b9">SG: ${esc(p.sg)}</span>
+          <span style="background:#edfaf1;border-radius:5px;padding:2px 7px;font-size:12px;color:#1a9e5f">PL: ${esc(p.pl)}</span>
+        </div>` : ''}
+        <div style="font-size:12px;color:#666;margin-bottom:2px">🇬🇧 ${esc(v.vi)}</div>
+        <div style="font-size:12px;color:#888;font-style:italic">${esc(v.ex)}</div>
+      </div></div>`;
+    }).join('')}`;
 }
 
 function hoerenHtml(t) {
