@@ -13,16 +13,56 @@ const T = [
     key: 'Hallo! Ich heiße ___. Ich komme aus ___. Ich bin ___ Jahre alt.',
     ytId: 'M7bJMFhcqcI',
     vocab: [
-      { de: 'Hallo',           vi: 'Hello',            ex: 'Hallo! Wie geht\'s?' },
-      { de: 'Tschüss',         vi: 'Bye (informal)',   ex: 'Tschüss! Bis bald!' },
-      { de: 'Guten Morgen',    vi: 'Good morning',     ex: 'Guten Morgen, alle!' },
-      { de: 'Guten Tag',       vi: 'Good afternoon',   ex: 'Guten Tag, Frau Müller.' },
-      { de: 'Auf Wiedersehen', vi: 'Goodbye (formal)', ex: 'Auf Wiedersehen!' },
-      { de: 'Ich heiße',       vi: 'My name is',       ex: 'Ich heiße Anna.' },
-      { de: 'Ich komme aus',   vi: 'I come from',      ex: 'Ich komme aus Vietnam.' },
-      { de: 'Ich wohne in',    vi: 'I live in',        ex: 'Ich wohne in Berlin.' },
-      { de: 'der Name (-n)',   vi: 'name',             ex: 'Mein Name ist Linh.' },
-      { de: 'Wie alt bist du?',vi: 'How old are you?', ex: 'Ich bin 24 Jahre alt.' },
+      // 1. Name
+      { de: 'der Name (-n)',           vi: 'name',               ex: 'Mein Name ist Linh.',                   cat: '1. Name 🏷️' },
+      { de: 'der Vorname (-n)',        vi: 'first name',         ex: 'Mein Vorname ist Linh.',                cat: '1. Name 🏷️' },
+      { de: 'der Nachname (-n)',       vi: 'surname / last name',ex: 'Mein Nachname ist Nguyen.',             cat: '1. Name 🏷️' },
+      { de: 'der Familienname (-n)',   vi: 'family name',        ex: 'Wie ist Ihr Familienname?',             cat: '1. Name 🏷️' },
+      // 2. Alter
+      { de: 'das Alter',               vi: 'age',                ex: 'Wie alt bist du?',                      cat: '2. Alter 🎂' },
+      { de: 'der Geburtstag (-e)',     vi: 'birthday',           ex: 'Wann ist dein Geburtstag?',             cat: '2. Alter 🎂' },
+      { de: 'geboren',                 vi: 'born',               ex: 'Ich bin 2000 geboren.',                 cat: '2. Alter 🎂' },
+      // 3. Land / Herkunft
+      { de: 'das Land (Länder)',       vi: 'country',            ex: 'Aus welchem Land kommst du?',           cat: '3. Land / Herkunft 🌍' },
+      { de: 'der Geburtsort (-e)',     vi: 'place of birth',     ex: 'Mein Geburtsort ist Hanoi.',            cat: '3. Land / Herkunft 🌍' },
+      // 4. Wohnort / Adresse
+      { de: 'der Wohnort (-e)',        vi: 'place of residence', ex: 'Mein Wohnort ist Berlin.',              cat: '4. Wohnort / Adresse 🏠' },
+      { de: 'die Adresse (-n)',        vi: 'address',            ex: 'Wie ist Ihre Adresse?',                 cat: '4. Wohnort / Adresse 🏠' },
+      { de: 'die Straße (-n)',         vi: 'street',             ex: 'Ich wohne in der Hauptstraße.',         cat: '4. Wohnort / Adresse 🏠' },
+      { de: 'die Hausnummer (-n)',     vi: 'house number',       ex: 'Die Hausnummer ist 5.',                 cat: '4. Wohnort / Adresse 🏠' },
+      { de: 'die Postleitzahl / PLZ',  vi: 'postal / zip code',  ex: 'Die PLZ ist 10115.',                   cat: '4. Wohnort / Adresse 🏠' },
+      { de: 'wohnen / leben',          vi: 'to live / to reside',ex: 'Ich wohne in Ho-Chi-Minh-Stadt.',      cat: '4. Wohnort / Adresse 🏠' },
+      // 5. Sprachen
+      { de: 'die Sprache (-n)',        vi: 'language',           ex: 'Welche Sprachen sprechen Sie?',         cat: '5. Sprachen 🗣️' },
+      { de: 'die Muttersprache (-n)',  vi: 'mother tongue',      ex: 'Meine Muttersprache ist Vietnamesisch.',cat: '5. Sprachen 🗣️' },
+      { de: 'sprechen',                vi: 'to speak',           ex: 'Ich spreche Deutsch und Englisch.',     cat: '5. Sprachen 🗣️' },
+      { de: 'Deutsch',                 vi: 'German (language)',  ex: 'Ich lerne Deutsch.',                    cat: '5. Sprachen 🗣️' },
+      { de: 'Englisch',                vi: 'English (language)', ex: 'Ich spreche Englisch.',                 cat: '5. Sprachen 🗣️' },
+      { de: 'Vietnamesisch',           vi: 'Vietnamese',         ex: 'Meine Muttersprache ist Vietnamesisch.',cat: '5. Sprachen 🗣️' },
+      // 6. Beruf
+      { de: 'der Beruf (-e)',          vi: 'job / profession',   ex: 'Was sind Sie von Beruf?',               cat: '6. Beruf 💼' },
+      { de: 'arbeiten',                vi: 'to work',            ex: 'Ich arbeite in einem Büro.',            cat: '6. Beruf 💼' },
+      { de: 'studieren',               vi: 'to study (uni)',     ex: 'Ich studiere Informatik.',              cat: '6. Beruf 💼' },
+      { de: 'der Student / die Studentin', vi: 'university student', ex: 'Ich bin Student.',                 cat: '6. Beruf 💼' },
+      { de: 'der Schüler / die Schülerin', vi: 'school student',     ex: 'Ich bin Schüler.',                 cat: '6. Beruf 💼' },
+      // 7. Familienstand
+      { de: 'der Familienstand',       vi: 'marital status',     ex: 'Wie ist Ihr Familienstand?',            cat: '7. Familienstand 💍' },
+      { de: 'ledig / Single',          vi: 'single',             ex: 'Ich bin ledig.',                        cat: '7. Familienstand 💍' },
+      { de: 'verheiratet',             vi: 'married',            ex: 'Ich bin verheiratet.',                  cat: '7. Familienstand 💍' },
+      { de: 'geschieden',              vi: 'divorced',           ex: 'Er ist geschieden.',                    cat: '7. Familienstand 💍' },
+      { de: 'die Geschwister (PL)',    vi: 'siblings',           ex: 'Ich habe zwei Geschwister.',            cat: '7. Familienstand 💍' },
+      { de: 'das Kind (-er)',          vi: 'child / children',   ex: 'Ich habe ein Kind.',                    cat: '7. Familienstand 💍' },
+      // 8. Hobbys
+      { de: 'das Hobby (-s)',          vi: 'hobby',              ex: 'Mein Hobby ist Lesen.',                 cat: '8. Hobbys ⚽' },
+      { de: 'die Freizeit',            vi: 'free time',          ex: 'In meiner Freizeit lese ich.',          cat: '8. Hobbys ⚽' },
+      { de: 'schwimmen',               vi: 'to swim',            ex: 'Ich schwimme gern.',                    cat: '8. Hobbys ⚽' },
+      { de: 'lesen',                   vi: 'to read',            ex: 'Ich lese gern Bücher.',                 cat: '8. Hobbys ⚽' },
+      { de: 'Musik hören',             vi: 'to listen to music', ex: 'Ich höre gern Musik.',                  cat: '8. Hobbys ⚽' },
+      { de: 'kochen',                  vi: 'to cook',            ex: 'Ich koche gern.',                       cat: '8. Hobbys ⚽' },
+      { de: 'reisen',                  vi: 'to travel',          ex: 'Ich reise gern.',                       cat: '8. Hobbys ⚽' },
+      { de: 'Fußball spielen',         vi: 'to play football',   ex: 'Ich spiele gern Fußball.',              cat: '8. Hobbys ⚽' },
+      { de: 'Gitarre spielen',         vi: 'to play guitar',     ex: 'Ich spiele gern Gitarre.',              cat: '8. Hobbys ⚽' },
+      { de: 'fernsehen',               vi: 'to watch TV',        ex: 'Ich sehe gern fern.',                   cat: '8. Hobbys ⚽' },
     ],
     reading: {
       title: 'Gespräch: Nicos erster Tag 🇩🇪',
@@ -34,6 +74,40 @@ const T = [
       ],
     },
     speaking: ['Hallo! Ich heiße ___.','Ich komme aus ___.','Ich wohne in ___.','Ich bin ___ Jahre alt.','Schön, dich kennenzulernen!'],
+    speakGroups: [
+      { cat: '1. Name 🏷️', items: [
+        { q: 'Wie heißen Sie? / Wie heißt du?',        a: 'Ich heiße ___. / Mein Name ist ___.' },
+        { q: 'Wie ist Ihr/dein Name?',                  a: 'Mein Name ist ___.' },
+        { q: 'Können Sie Ihren Namen buchstabieren?',   a: 'Ja, natürlich: ___.' },
+      ]},
+      { cat: '2. Alter 🎂', items: [
+        { q: 'Wie alt sind Sie? / Wie alt bist du?',    a: 'Ich bin ___ Jahre alt.' },
+        { q: 'Wann sind Sie geboren?',                  a: 'Ich bin am ___ geboren.' },
+        { q: 'Wann hast du Geburtstag?',                a: 'Mein Geburtstag ist am ___.' },
+      ]},
+      { cat: '3. Herkunft 🌍', items: [
+        { q: 'Woher kommen Sie? / Woher kommst du?',    a: 'Ich komme aus ___.' },
+      ]},
+      { cat: '4. Wohnort 🏠', items: [
+        { q: 'Wo wohnen Sie? / Wo wohnst du?',          a: 'Ich wohne in ___.' },
+        { q: 'Wie ist Ihre Adresse / Telefonnummer?',   a: 'Meine Adresse ist ___. Meine Nummer ist ___.' },
+      ]},
+      { cat: '5. Sprachen 🗣️', items: [
+        { q: 'Welche Sprachen sprechen Sie?',           a: 'Ich spreche ___ und ein bisschen Deutsch.' },
+      ]},
+      { cat: '6. Beruf 💼', items: [
+        { q: 'Was sind Sie von Beruf?',                 a: 'Ich bin ___. / Ich arbeite als ___.' },
+        { q: 'Arbeitest oder studierst du?',            a: 'Ich studiere ___. / Ich arbeite bei ___.' },
+      ]},
+      { cat: '7. Familienstand 💍', items: [
+        { q: 'Wie ist Ihr Familienstand?',              a: 'Ich bin ledig / verheiratet / geschieden.' },
+        { q: 'Hast du Kinder / Geschwister?',           a: 'Ja, ich habe ___ Kinder / Geschwister.' },
+      ]},
+      { cat: '8. Hobbys ⚽', items: [
+        { q: 'Was sind Ihre Hobbys?',                   a: 'Mein Hobby ist ___.' },
+        { q: 'Was machst du in deiner Freizeit?',       a: 'In meiner Freizeit ___ ich gern.' },
+      ]},
+    ],
     writing: {
       task: 'Schreib 3–5 Sätze über dich! ✍️',
       tmpl: 'Ich heiße ___. Ich komme aus ___. Ich wohne in ___. Ich bin ___ Jahre alt.',
@@ -658,6 +732,70 @@ function parseSgPl(de) {
   return { sg: `${art} ${noun}`, pl: `die ${plNoun}` };
 }
 
+// ── Render a single vocab item ──
+function vocabItemHtml(v) {
+  const p = parseSgPl(v.de);
+  return `<div class="vi"><div style="flex:1">
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
+      <span style="font-weight:600;font-size:15px">${p ? p.sg : esc(v.de)}</span>
+      <button class="spk" data-speak="${encodeURIComponent(p ? p.sg : v.de)}">🔊</button>
+    </div>
+    ${p ? `<div style="display:flex;gap:6px;margin-bottom:4px;flex-wrap:wrap">
+      <span style="background:#e8f4fd;border-radius:5px;padding:2px 7px;font-size:12px;color:#2980b9">SG: ${esc(p.sg)}</span>
+      <span style="background:#edfaf1;border-radius:5px;padding:2px 7px;font-size:12px;color:#1a9e5f">PL: ${esc(p.pl)}</span>
+    </div>` : ''}
+    <div style="font-size:12px;color:#666;margin-bottom:2px">🇬🇧 ${esc(v.vi)}</div>
+    <div style="font-size:12px;color:#888;font-style:italic">${esc(v.ex)}</div>
+  </div></div>`;
+}
+
+// ── Render vocab list, grouped by category if cat field exists ──
+function renderVocabList(vocab) {
+  const hasCats = vocab.some(v => v.cat);
+  if (!hasCats) return vocab.map(vocabItemHtml).join('');
+  const cats = {}, order = [];
+  vocab.forEach(v => {
+    const c = v.cat || 'Other';
+    if (!cats[c]) { cats[c] = []; order.push(c); }
+    cats[c].push(v);
+  });
+  return order.map(cat => `
+    <div style="margin-bottom:16px">
+      <div style="font-weight:600;font-size:13px;background:#f0f0f0;padding:7px 12px;border-radius:8px;margin-bottom:8px;color:#333;border-left:4px solid #bbb">
+        📂 ${esc(cat)}
+      </div>
+      ${cats[cat].map(vocabItemHtml).join('')}
+    </div>`).join('');
+}
+
+// ── Speaking: grouped Q&A layout (used when topic has speakGroups) ──
+function sprechenGroupsHtml(t) {
+  return `
+    <div style="background:#edfaf7;border:1px solid #1abc9c;border-radius:12px;padding:16px;margin-bottom:16px">
+      <h3 style="color:#0e8c6f;margin-bottom:4px">🗣️ Questions & Answers</h3>
+      <p style="font-size:13px;color:#555;margin-bottom:14px">Press 🔊 → Listen → Repeat out loud!</p>
+      ${t.speakGroups.map(group => `
+        <div style="margin-bottom:16px">
+          <div style="font-weight:600;font-size:13px;background:rgba(26,188,156,.15);padding:7px 12px;border-radius:8px;margin-bottom:8px;color:#0e8c6f;border-left:4px solid #1abc9c">
+            ${esc(group.cat)}
+          </div>
+          ${group.items.map(item => `
+            <div style="background:#fff;border-radius:10px;padding:12px 14px;margin-bottom:8px">
+              <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px">
+                <span style="font-size:11px;background:#3498db;color:#fff;border-radius:4px;padding:2px 6px;flex-shrink:0;margin-top:2px">Q</span>
+                <span style="font-size:14px;color:#111;flex:1">${esc(item.q)}</span>
+                <button class="spk" data-speak="${encodeURIComponent(item.q)}" style="font-size:15px;flex-shrink:0">🔊</button>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:8px">
+                <span style="font-size:11px;background:#1a9e5f;color:#fff;border-radius:4px;padding:2px 6px;flex-shrink:0;margin-top:2px">A</span>
+                <span style="font-size:14px;color:#555;font-style:italic;flex:1">${esc(item.a)}</span>
+                <button class="spk" data-speak="${encodeURIComponent(item.a)}" style="font-size:15px;flex-shrink:0">🔊</button>
+              </div>
+            </div>`).join('')}
+        </div>`).join('')}
+    </div>`;
+}
+
 function esc(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
@@ -828,21 +966,7 @@ function vocabHtml(t) {
       </div>
     </div>
     <h3 style="font-size:14px;color:#555;margin-bottom:10px">📋 All Vocabulary</h3>
-    ${t.vocab.map(v => {
-      const p = parseSgPl(v.de);
-      return `<div class="vi"><div style="flex:1">
-        <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
-          <span style="font-weight:600;font-size:15px">${p ? p.sg : esc(v.de)}</span>
-          <button class="spk" data-speak="${encodeURIComponent(p ? p.sg : v.de)}">🔊</button>
-        </div>
-        ${p ? `<div style="display:flex;gap:6px;margin-bottom:4px;flex-wrap:wrap">
-          <span style="background:#e8f4fd;border-radius:5px;padding:2px 7px;font-size:12px;color:#2980b9">SG: ${esc(p.sg)}</span>
-          <span style="background:#edfaf1;border-radius:5px;padding:2px 7px;font-size:12px;color:#1a9e5f">PL: ${esc(p.pl)}</span>
-        </div>` : ''}
-        <div style="font-size:12px;color:#666;margin-bottom:2px">🇬🇧 ${esc(v.vi)}</div>
-        <div style="font-size:12px;color:#888;font-style:italic">${esc(v.ex)}</div>
-      </div></div>`;
-    }).join('')}`;
+    ${renderVocabList(t.vocab)}`;
 }
 
 function hoerenHtml(t) {
@@ -863,6 +987,7 @@ function hoerenHtml(t) {
 }
 
 function sprechenHtml(t) {
+  if (t.speakGroups) return sprechenGroupsHtml(t);
   return `
     <div style="background:#edfaf7;border:1px solid #1abc9c;border-radius:12px;padding:16px;margin-bottom:16px">
       <h3 style="color:#0e8c6f;margin-bottom:4px">🗣️ Repeat out loud!</h3>
