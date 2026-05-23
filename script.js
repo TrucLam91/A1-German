@@ -725,7 +725,7 @@ const VERBS = [
 // ════════════════════════════════════════
 const S = {
   page: 'home', topic: null, grammar: null, skill: 'vocab',
-  progress: {}, writing: {}, showAns: {},
+  progress: {}, writing: {}, showAns: {}, vocabOpen: {},
   fc: { idx: 0, flipped: false },
   quiz: { questions: [], idx: 0, sel: null, score: 0, done: false, final: 0, src: null },
   quizInit: false,
@@ -925,7 +925,7 @@ function render() {
 }
 
 function navHtml() {
-  const links = [['home','🏠 Home'],['topics','📚 Topics'],['grammar','✏️ Grammar'],['verbs','🔄 Verbs'],['quiz','🏆 Quiz']];
+  const links = [['home','🏠 Home'],['topics','📚 Topics'],['vocab','📖 Vocab'],['grammar','✏️ Grammar'],['verbs','🔄 Verbs'],['quiz','🏆 Quiz']];
   return `<nav class="nav">
     <span style="color:#FFCE00;font-size:20px;margin-right:8px">🇩🇪</span>
     <span class="nav-title">Deutsch A1</span>
@@ -936,7 +936,7 @@ function navHtml() {
 function pageHtml() {
   if (S.topic)   return topicDetailHtml();
   if (S.grammar) return grammarDetailHtml();
-  const pages = { home: homeHtml, topics: topicsHtml, grammar: grammarHtml, verbs: verbsHtml, quiz: quizPageHtml };
+  const pages = { home: homeHtml, topics: topicsHtml, vocab: vocabPageHtml, grammar: grammarHtml, verbs: verbsHtml, quiz: quizPageHtml };
   return (pages[S.page] || homeHtml)();
 }
 
@@ -1231,6 +1231,49 @@ function quizPageHtml() {
 }
 
 // ════════════════════════════════════════
+//  PAGE: VOCABULARY BY TOPIC
+// ════════════════════════════════════════
+function vocabPageHtml() {
+  const totalWords = T.reduce((s, t) => s + t.vocab.length, 0);
+  return `<div class="page">
+    <div style="padding-top:16px;margin-bottom:20px">
+      <h2 style="margin-bottom:4px">📖 Vocabulary by Topic</h2>
+      <p style="color:#666;font-size:13px">${T.length} topics · ${totalWords} words total · Click a topic to expand</p>
+    </div>
+
+    ${T.map(t => {
+      const open = !!S.vocabOpen[t.id];
+      return `
+        <div style="margin-bottom:10px;border-radius:12px;overflow:hidden;border:1.5px solid ${open ? t.color : '#e0e0e0'};transition:border-color .2s">
+
+          <!-- Topic header (click to toggle) -->
+          <button data-vopen="${t.id}" style="width:100%;background:${open ? t.color : '#fff'};border:none;padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:12px;text-align:left;transition:background .2s">
+            <div style="width:44px;height:44px;border-radius:10px;background:${open ? 'rgba(255,255,255,.2)' : t.light};display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0">${t.emoji}</div>
+            <div style="flex:1">
+              <div style="font-size:15px;font-weight:600;color:${open ? '#fff' : '#111'}">${esc(t.title)}</div>
+              <div style="font-size:12px;color:${open ? 'rgba(255,255,255,.8)' : '#888'};margin-top:2px">${esc(t.sub)} · ${t.vocab.length} words</div>
+            </div>
+            <span style="font-size:18px;color:${open ? '#fff' : '#bbb'};transition:transform .2s;display:inline-block;transform:rotate(${open ? '180' : '0'}deg)">▼</span>
+          </button>
+
+          <!-- Vocabulary list (shown when open) -->
+          ${open ? `
+            <div style="padding:12px 16px 16px;background:#fff;border-top:1px solid ${t.color}33">
+              <div style="background:${t.light};border-radius:10px;padding:10px 14px;margin-bottom:12px;border-left:4px solid ${t.color}">
+                <span style="font-size:11px;color:${t.color};font-weight:600">⭐ KEY TAKEAWAY</span>
+                <div style="display:flex;align-items:center;gap:8px;margin-top:4px">
+                  <p style="font-size:13px;font-style:italic;color:#333;margin:0;flex:1">${esc(t.key)}</p>
+                  <button class="spk" data-speak="${encodeURIComponent(t.key)}" style="font-size:15px;flex-shrink:0">🔊</button>
+                </div>
+              </div>
+              ${renderVocabList(t.vocab)}
+            </div>` : ''}
+        </div>`;
+    }).join('')}
+  </div>`;
+}
+
+// ════════════════════════════════════════
 //  PAGE: VERB CONJUGATIONS
 // ════════════════════════════════════════
 function verbsHtml() {
@@ -1352,6 +1395,11 @@ function handleClick(e) {
   }
   if (el.dataset.tid) { S.topic=T.find(t=>t.id==el.dataset.tid); S.skill='vocab'; S.fc={idx:0,flipped:false}; S.quiz={questions:[],idx:0,sel:null,score:0,done:false,final:0,src:null}; render(); return; }
   if (el.dataset.gid) { S.grammar=G.find(g=>g.id==el.dataset.gid); S.quiz={questions:[],idx:0,sel:null,score:0,done:false,final:0,src:null}; render(); return; }
+  if (el.dataset.vopen !== undefined) {
+    const id = parseInt(el.dataset.vopen);
+    S.vocabOpen[id] = !S.vocabOpen[id];
+    render(); return;
+  }
   if (el.dataset.skill) { S.skill=el.dataset.skill; S.quiz={questions:[],idx:0,sel:null,score:0,done:false,final:0,src:null}; render(); return; }
   if (el.dataset.ans) { S.showAns[el.dataset.ans]=true; render(); return; }
 
