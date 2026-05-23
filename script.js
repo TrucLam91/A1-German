@@ -958,12 +958,13 @@ function homeHtml() {
       ${done?`<div class="pbg"><div class="pfill" style="width:${done*10}%"></div></div><p style="color:#FFCE00;font-size:12px;margin-top:6px">${done*10}% completed!</p>`:''}
     </div>
     <div class="page">
-      <div class="g2" style="margin-bottom:24px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px">
         ${[
-          {l:'All Topics 📚',d:'10 themes A1',  c:'#e74c3c',n:'topics'},
-          {l:'Grammar ✏️',   d:'6 lessons',     c:'#3498db',n:'grammar'},
-          {l:'Quiz 🏆',       d:'Test everything',c:'#f39c12',n:'quiz'},
-          {l:'Random 🎲',    d:'Surprise me!',  c:'#9b59b6',n:'random'},
+          {l:'All Topics 📚', d:'10 themes A1',       c:'#e74c3c', n:'topics'},
+          {l:'Grammar ✏️',    d:'6 lessons',           c:'#3498db', n:'grammar'},
+          {l:'Verbs 🔄',      d:'7 groups · 40 verbs', c:'#1abc9c', n:'verbs'},
+          {l:'Quiz 🏆',       d:'Test everything',     c:'#f39c12', n:'quiz'},
+          {l:'Random 🎲',     d:'Surprise me!',        c:'#9b59b6', n:'random'},
         ].map(b=>`<button data-nav="${b.n}" style="background:${b.c};color:#fff;border:none;border-radius:12px;padding:16px 12px;cursor:pointer;text-align:left;width:100%"><div style="font-size:15px;font-weight:500">${b.l}</div><div style="font-size:12px;opacity:.85;margin-top:2px">${b.d}</div></button>`).join('')}
       </div>
       <h2 style="margin-bottom:12px">All Topics 🗺️</h2>
