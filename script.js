@@ -632,8 +632,7 @@ function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
 
 // ── RENDER ──
 function render(){
-  document.getElementById('app').innerHTML=navHtml()+pageHtml();
-  // Don't re-bind events here — listeners are attached once at init
+  document.getElementById('app').innerHTML = navHtml() + pageHtml();
 }
 
 function navHtml(){
@@ -937,18 +936,17 @@ function quizWidgetHtml(questions,src){
   </div>`;
 }
 
-// ── EVENTS — bound ONCE, never inside render() ──
+// ── EVENTS — attached to document once, survives all re-renders ──
 function bindEvents(){
-  const app=document.getElementById('app');
-  app.addEventListener('click',handleClick);
-  app.addEventListener('input',handleInput);
+  document.addEventListener('click', handleClick);
+  document.addEventListener('input', handleInput);
 }
 
 function handleClick(e){
   const el=e.target.closest('[data-nav],[data-tid],[data-gid],[data-action],[data-skill],[data-pick],[data-ans],[data-speak],[data-verbopen],[data-vopen]');
   if(!el)return;e.stopPropagation();
   if(el.dataset.speak){speak(decodeURIComponent(el.dataset.speak));return;}
-  if(el.dataset.verbopen!==undefined){S.verbOpen[parseInt(el.dataset.verbopen)]=!S.verbOpen[parseInt(el.dataset.verbopen)];// ── INIT — bind events once, then render ──
+  if(el.dataset.verbopen!==undefined){S.verbOpen[parseInt(el.dataset.verbopen)]=!S.verbOpen[parseInt(el.dataset.verbopen)];// ── INIT ──
 render();
 bindEvents();return;}
   if(el.dataset.vopen!==undefined){S.vocabOpen[parseInt(el.dataset.vopen)]=!S.vocabOpen[parseInt(el.dataset.vopen)];render();return;}
