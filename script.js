@@ -894,8 +894,81 @@ function verbsHtml(){
   </div>`;
 }
 
-// ── QUIZ PAGE ──
-function quizPageHtml(){
+// ── QUIZ WIDGET ──
+// Uses direct window functions called via inline onclick — bypasses all event delegation
+window._qPick = function(i){
+  if(S.quiz.sel !== null) return;
+  S.quiz.sel = parseInt(i);
+  render();
+};
+window._qNext = function(){
+  const q = S.quiz;
+  const correct = q.sel === q.questions[q.idx].a;
+  const ns = q.score + (correct ? 1 : 0);
+  if(q.idx + 1 < q.questions.length){
+    S.quiz = {...q, idx: q.idx+1, sel: null, score: ns};
+  } else {
+    S.quiz = {...q, done: true, final: ns, score: ns};
+    if(S.topic && ns >= 3){ S.progress[S.topic.id]=true; saveProg(); }
+  }
+  render();
+};
+window._qRetry = function(){
+  const src = S.quiz.src;
+  let qs;
+  if(src==='main') qs=[...T.flatMap(t=>t.quiz)].sort(()=>Math.random()-.5).slice(0,20);
+  else if(src && src.startsWith('g')) qs=G.find(g=>g.id==src.slice(1)).ex;
+  else qs=S.topic ? S.topic.quiz : [];
+  S.quiz={questions:qs,idx:0,sel:null,score:0,done:false,final:0,src};
+  render();
+};
+
+function quizWidgetHtml(questions, src){
+  if(S.quiz.src !== src) S.quiz={questions,idx:0,sel:null,score:0,done:false,final:0,src};
+  if(!S.quiz.questions.length) S.quiz.questions = questions;
+  const q = S.quiz;
+
+  if(q.done){
+    const pct = Math.round((q.final/questions.length)*100);
+    const icon = pct===100?'🏆':pct>=60?'⭐':'💪';
+    const msg  = pct===100?'Perfect! You\'re a star! 🌟':pct>=60?'Well done! Keep it up! 💪':'Practice makes perfect! 📚';
+    return `<div style="text-align:center;padding:32px 16px">
+      <div style="font-size:56px;margin-bottom:8px">${icon}</div>
+      <div style="font-size:28px;font-weight:500;margin-bottom:4px">${q.final}/${questions.length} correct</div>
+      <div style="color:#666;margin-bottom:20px">${msg}</div>
+      <button onclick="window._qRetry()" style="background:#111;color:#fff;border:none;border-radius:8px;padding:12px 24px;cursor:pointer;font-size:15px;font-weight:500">Try again 🔄</button>
+    </div>`;
+  }
+
+  const qi = questions[q.idx];
+  const answered = q.sel !== null;
+
+  return `<div>
+    <div style="display:flex;justify-content:space-between;margin-bottom:12px">
+      <span style="font-size:13px;color:#666">Question ${q.idx+1} / ${questions.length}</span>
+      <span style="font-size:13px;color:#666">✅ ${q.score} correct</span>
+    </div>
+    <div style="background:#fff8e1;border-left:4px solid #FFCE00;border-radius:0 8px 8px 0;padding:12px 16px;margin-bottom:16px">
+      <p style="margin:0;font-size:16px;font-weight:500">${esc(qi.q)}</p>
+    </div>
+    ${qi.o.map((opt,i)=>{
+      let bg='#fff', border='1px solid #ddd', col='#111', prefix='';
+      if(answered){
+        if(i===qi.a)       { bg='#edfaf1'; border='2px solid #1a9e5f'; prefix='✅ '; }
+        else if(i===q.sel) { bg='#fdf2f2'; border='2px solid #e74c3c'; col='#c0392b'; prefix='❌ '; }
+      }
+      return `<button
+        onclick="${answered?'':` window._qPick(${i})`}"
+        style="display:block;width:100%;padding:12px 14px;margin-bottom:8px;border-radius:8px;border:${border};background:${bg};color:${col};cursor:${answered?'default':'pointer'};text-align:left;font-size:15px;font-family:system-ui,sans-serif">
+        ${prefix}${esc(opt)}
+      </button>`;
+    }).join('')}
+    ${answered ? `<button onclick="window._qNext()"
+      style="margin-top:8px;background:#111;color:#fff;border:none;border-radius:8px;padding:12px 24px;cursor:pointer;font-size:15px;font-weight:500">
+      ${q.idx+1 < questions.length ? 'Next →' : 'See results 🏆'}
+    </button>` : ''}
+  </div>`;
+}
   if(!S.quizInit){
     const qs=[...T.flatMap(t=>t.quiz)].sort(()=>Math.random()-.5).slice(0,20);
     S.quiz={questions:qs,idx:0,sel:null,score:0,done:false,final:0,src:'main'};S.quizInit=true;
@@ -939,7 +1012,7 @@ function quizWidgetHtml(questions,src){
 // ── EVENTS ──
 function handleClick(e){
   if(!e.target || typeof e.target.closest !== 'function') return;
-  const el = e.target.closest('[data-nav],[data-tid],[data-gid],[data-action],[data-skill],[data-pick],[data-ans],[data-speak],[data-verbopen],[data-vopen]');
+  const el = e.target.closest('[data-nav],[data-tid],[data-gid],[data-action],[data-skill],[data-ans],[data-speak],[data-verbopen],[data-vopen]');
   if(!el) return;
   if(el.dataset.speak){speak(decodeURIComponent(el.dataset.speak));return;}
   if(el.dataset.verbopen!==undefined){S.verbOpen[parseInt(el.dataset.verbopen)]=!S.verbOpen[parseInt(el.dataset.verbopen)];// ── INIT ──
@@ -961,20 +1034,6 @@ render();return;}
   if(a==='fc-prev'){S.fc.idx=(S.fc.idx-1+S.topic.vocab.length)%S.topic.vocab.length;S.fc.flipped=false;render();return;}
   if(a==='fc-next'){S.fc.idx=(S.fc.idx+1)%S.topic.vocab.length;S.fc.flipped=false;render();return;}
   if(a==='done'){S.progress[S.topic.id]=true;saveProg();render();return;}
-  if(a==='retry'){
-    const src=S.quiz.src;let qs;
-    if(src==='main')qs=[...T.flatMap(t=>t.quiz)].sort(()=>Math.random()-.5).slice(0,20);
-    else if(src?.startsWith('g'))qs=G.find(g=>g.id==src.slice(1)).ex;
-    else qs=S.topic?S.topic.quiz:[];
-    S.quiz={questions:qs,idx:0,sel:null,score:0,done:false,final:0,src};render();return;
-  }
-  if(a==='next'){
-    const q=S.quiz,correct=q.sel===q.questions[q.idx].a,ns=q.score+(correct?1:0);
-    if(q.idx+1<q.questions.length)S.quiz={...q,idx:q.idx+1,sel:null,score:ns};
-    else{S.quiz={...q,done:true,final:ns,score:ns};if(S.topic&&ns>=3){S.progress[S.topic.id]=true;saveProg();}}
-    render();return;
-  }
-  if(el.dataset.pick!==undefined){if(S.quiz.sel!==null)return;S.quiz.sel=parseInt(el.dataset.pick);render();return;}
 }
 
 function handleInput(e){
