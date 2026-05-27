@@ -5,7 +5,7 @@
 // ── TOPICS ──
 var T=[
 {id:1,emoji:'👋',title:'Sich vorstellen',sub:'Greetings & Introductions',color:'#e74c3c',light:'#fdecea',
-key:'Hallo! Ich heiße ___. Ich komme aus ___. Ich bin ___ Jahre alt.',ytId:'M7bJMFhcqcI',
+key:'Hallo! Ich heiße ___. Ich komme aus ___. Ich bin ___ Jahre alt.',ytId:'p7IJ8v9_Guc',
 vocab:[
 {de:'der Name (-n)',vi:'name',ex:'Mein Name ist Linh.',cat:'1. Name 🏷️'},
 {de:'der Vorname (-n)',vi:'first name',ex:'Mein Vorname ist Linh.',cat:'1. Name 🏷️'},
@@ -39,7 +39,7 @@ vocab:[
 {de:'reisen',vi:'to travel',ex:'Ich reise gern.',cat:'8. Hobbys ⚽'},
 ],
 reading:{title:'Erster Tag im Deutschkurs 🇩🇪',
-text:'Lehrerin: Guten Morgen! Stellen Sie sich bitte vor!\nLinh: Hallo! Ich heiße Linh Nguyen. Mein Vorname ist Linh, mein Nachname ist Nguyen.\nLehrerin: Woher kommen Sie, Linh?\nLinh: Ich komme aus Vietnam, aus Ho-Chi-Minh-Stadt. Ich wohne jetzt in Berlin.\nLehrerin: Wie alt sind Sie?\nLinh: Ich bin 24 Jahre alt. Ich studiere Informatik. Meine Muttersprache ist Vietnamesisch.\nLehrerin: Und Ihre Hobbys?\nLinh: In meiner Freizeit höre ich Musik und reise gern. Schön, Sie kennenzulernen!',
+text:'Lehrerin: Guten Morgen! Wie heißt du?\nLinh: Guten Morgen! Ich heiße Linh Nguyen. Mein Vorname ist Linh, mein Nachname ist Nguyen.\nLehrerin: Woher kommst du, Linh?\nLinh: : Ich komme aus Vietnam, aber ich wohne jetzt in Berlin.\nLehrerin: Wie alt bist du?\nIch bin 24 Jahre alt. Ich studiere Informatik. Meine Muttersprache ist Vietnamesisch.\nLehrerin: Und deine Hobbys?\nLinh: In meiner Freizeit höre ich Musik und reise gern. Schön, Sie kennenzulernen!',
 qs:[{q:'Woher kommt Linh?',a:'Linh kommt aus Vietnam, aus Ho-Chi-Minh-Stadt.'},{q:'Was studiert Linh?',a:'Linh studiert Informatik.'},{q:'Was sind Linhs Hobbys?',a:'Linh hört Musik und reist gern.'}]},
 speaking:['Hallo! Ich heiße ___.','Ich komme aus ___.','Ich wohne in ___.','Ich bin ___ Jahre alt.','Schön, dich kennenzulernen!'],
 speakGroups:[
