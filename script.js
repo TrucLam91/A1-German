@@ -204,7 +204,7 @@ vocab:[
 ],
 reading:{title:'Erstes Date',
 text:'Max: Hallo Anna! Schön, dich kennenzulernen.\nAnna: Hallo Max! Freut mich auch.\nMax: Sag mal, wie alt bist du? Du siehst sehr jung aus.\nAnna: Danke! Ich bin zweiundzwanzig (22) Jahre alt. Und du?\nMax: Ich bin fünfundzwanzig (25). Wann hast du Geburtstag?\nAnna: Mein Geburtstag ist am siebten Mai (7. Mai). Und deiner?\nMax: Ich habe im Herbst Geburtstag, am zwölften Oktober (12. Oktober). Hast du eigentlich Geschwister?\nAnna: Ja, ich habe zwei Schwestern. Sie sind sechzehn (16) und neunzehn (19) Jahre alt.\nMax: Das ist toll. Du, das Café schließt schon um 20 Uhr. Wollen wir uns am Wochenende wiedersehen?\nAnna: Ja, gern! Am Samstag?\nMax: Samstag ist super. Um halb acht (19:30 Uhr)?\nMax: Samstag ist super. Um halb acht (19:30 Uhr)?\nMax: Klar, meine Nummer ist 0-1-7-6 - 8-3-4 - 5-6 - 9-0.\nAnna: Super, ich rufe dich an! Bis Samstag!',
-qs:[{q:'Wann ist Anna Geburtstag?',a:'Annas Geburtstag ist am siebten Mai.'},{q:'Wie alt ist Max?',a:'Max ist 25 Jahre alt.'},{q:'Wie viele Geschwister hat Anna?',a:'Anna hat zwei Geschwister.'}]},
+qs:[{q:'Wann ist Annas Geburtstag?',a:'Annas Geburtstag ist am siebten Mai.'},{q:'Wie alt ist Max?',a:'Max ist 25 Jahre alt.'},{q:'Wie viele Geschwister hat Anna?',a:'Anna hat zwei Geschwister.'}]},
 speaking:['Heute ist der ___ (Datum).','Ich bin am ___ geboren.','Es ist ___ Uhr.','Das kostet ___ Euro.','Wann ist dein Geburtstag?'],
 writing:{task:'Schreib dein Geburtsdatum und einen Termin! ✍️',tmpl:'Ich bin am ___ geboren. Heute ist der ___. Meine Telefonnummer ist ___.',ex:'Ich bin am 5. März 2000 geboren. Heute ist der 20. April. Es ist Montag. Meine Telefonnummer ist 0901234567.'},
 quiz:[
