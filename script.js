@@ -154,7 +154,7 @@ quiz:[
 ]},
 
 {id:4,emoji:'🍕',title:'Essen & Trinken',sub:'Food & Drinks',color:'#f39c12',light:'#fefbf0',
-key:'Ich möchte einen Kaffee, bitte. Was kostet das Schnitzel?',ytId:'KLkGurBLb4Q',
+key:'Ich möchte einen Kaffee, bitte. Was kostet das Schnitzel?',ytId:'LcJKlry_UV4',
 vocab:[
 {de:'das Brot (-e)',vi:'bread',ex:'Ich esse Brot zum Frühstück.'},
 {de:'der Kaffee (-s)',vi:'coffee',ex:'Ich trinke gern Kaffee.'},
@@ -168,7 +168,7 @@ vocab:[
 {de:'die Rechnung (-en)',vi:'bill / check',ex:'Die Rechnung, bitte!'},
 ],
 reading:{title:'Im Restaurant 🍽️',
-text:'Kellner: Was möchten Sie trinken?\nKunde: Ein Wasser, bitte. Was empfehlen Sie?\nKellner: Das Schnitzel ist sehr gut. Es kostet 14 Euro.\nKunde: Prima! Ich nehme das Schnitzel.\nKellner: Zusammen macht das 14 Euro.',
+text:'Lukas: Hallo Mia! Hast du Hunger? Wir können etwas essen gehen.\nMia: Hallo Lukas! Ja, gern. Was isst du denn am liebsten?\nLukas: Ich esse sehr gern Hamburger mit Pommes. Und du? Magst du auch Hamburger?\nMia: Nein, Fleisch esse ich nicht. Ich esse lieber Nudeln mit Tomatensoße. Das ist mein Lieblingsessen!\nLukas: Nudeln finde ich auch gut. Und was trinkst du? Cola?\nMia: Nein, Cola ist mir zu süß. Ich trinke Apfelsaft oder Wasser.\nLukas: Okay, super! Dann gehen wir!',
 qs:[{q:'Was kostet das Schnitzel?',a:'Das Schnitzel kostet 14 Euro.'},{q:'Was möchte der Kunde trinken?',a:'Der Kunde möchte ein Wasser.'},{q:'Was nimmt der Kunde?',a:'Der Kunde nimmt das Schnitzel.'}]},
 speaking:['Ich möchte ___, bitte.','Was kostet ___?','Das schmeckt sehr lecker!','Die Rechnung, bitte!'],
 writing:{task:'Was isst du zum Frühstück? ✍️',tmpl:'Zum Frühstück esse ich ___. Ich trinke ___.',ex:'Zum Frühstück esse ich Brot mit Butter. Ich trinke Kaffee mit Milch. Das ist sehr lecker!'},
