@@ -201,7 +201,7 @@ vocab:[
 {de:'der Monat (-e)',vi:'month',ex:'Es gibt zwölf Monate.',cat:'7. Datum & Jahr 📆'},
 {de:'neunzehnhundertneunundneunzig',vi:'1999',ex:'Ich bin 1999 geboren.',cat:'7. Datum & Jahr 📆'},
 {de:'zweitausendvierzehn',vi:'2014',ex:'Das Jahr 2014.',cat:'7. Datum & Jahr 📆'},
-]},
+],
 reading:{
   title:'Erstes Date',
   text:'Max: Hallo Anna! Schön, dich kennenzulernen.\nAnna: Hallo Max! Freut mich auch.\nMax: Sag mal, wie alt bist du? Du siehst sehr jung aus.\nAnna: Danke! Ich bin zweiundzwanzig (22) Jahre alt. Und du?\nMax: Ich bin fünfundzwanzig (25). Wann hast du Geburtstag?\nAnna: Mein Geburtstag ist am siebten Mai (7. Mai). Und deiner?\nMax: Ich habe im Herbst Geburtstag, am zwölften Oktober (12. Oktober). Hast du eigentlich Geschwister?\nAnna: Ja, ich habe zwei Schwestern. Sie sind sechzehn (16) und neunzehn (19) Jahre alt.\nMax: Das ist toll. Du, das Café schließt schon um 20 Uhr. Wollen wir uns am Wochenende wiedersehen?\nAnna: Ja, gern! Am Samstag?\nMax: Samstag ist super. Um halb acht (19:30 Uhr)?\nMax: Samstag ist super. Um halb acht (19:30 Uhr)?\nMax: Klar, meine Nummer ist 0-1-7-6 - 8-3-4 - 5-6 - 9-0.\nAnna: Super, ich rufe dich an! Bis Samstag!',
