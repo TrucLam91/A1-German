@@ -62,7 +62,7 @@ quiz:[
 ]},
 
 {id:2,emoji:'👨‍👩‍👧‍👦',title:'Familie',sub:'Family',color:'#e67e22',light:'#fdf5ec',
-key:'Das ist meine Familie. Ich habe einen Bruder und eine Schwester.',ytId:'gMxLXBcCY_c',
+key:'Das ist meine Familie. Ich habe einen Bruder und eine Schwester.',ytId:'iMkblK6Iw3I',
 vocab:[
 // 1. Kernfamilie
 {de:'die Familie (-n)',vi:'family',ex:'Meine Familie ist groß.',cat:'1. Kernfamilie 👨‍👩‍👧'},
@@ -99,7 +99,7 @@ vocab:[
 {de:'allein',vi:'alone / living alone',ex:'Ich wohne allein.',cat:'4. Familienstand 💍'},
 ],
 reading:{title:'Annas Familie 👨‍👩‍👧‍👦',
-text:'Anna stellt ihre Familie vor: Wir sind fünf Personen. Mein Vater heißt Thomas. Er ist Ingenieur. Meine Mutter heißt Sabine. Sie ist Lehrerin. Ich habe eine jüngere Schwester. Sie heißt Laura und ist 16 Jahre alt. Mein Bruder Max ist 20 Jahre alt und studiert in Berlin. Meine Großeltern – Opa Hans und Oma Ingrid – wohnen in Bayern. Ich besuche sie oft am Wochenende. Wir haben auch einen Onkel und eine Tante. Ihr Sohn heißt Peter – das ist mein Cousin. Meine Eltern sind seit 25 Jahren verheiratet. Mein Bruder ist noch ledig. Ich auch!',
+text:'Anna: Hallo Wolfgang! Schönes Foto! Ist das deine Familie?\nWolfgang: Hallo Anna! Ja, genau. Schau mal, das sind meine Eltern. Mein Vater heißt Thomas und meine Mutter heißt Sabine.\nAnna: Was sind deine Eltern von Beruf?\nWolfgang: Mein Vater ist Ingenieur und er fotografiert sehr gern in seiner Freizeit. Meine Mutter arbeitet als Lehrerin. Ihr Hobby ist kochen. Sie kocht wirklich super!\nAnna: Interessant! Und wer ist der junge Mann hier? Ist das dein Bruder?\nWolfgang: Richtig. Das ist mein Bruder, Lukas. Er studiert Informatik in München. Er spielt gern Gitarre und macht viel Sport. Ich bin auch auf dem Foto. Ich bin Student und lese gern.\nAnna: Toll! Und die zwei älteren Leute? Wohnen deine Großeltern auch bei euch?\nWolfgang: Ja, mein Opa und meine Oma leben bei uns. Sie sind Rentner. Mein Opa arbeitet gern im Garten und meine Oma liebt Musik.\nAnna: Schön! Was macht ihr gerne zusammen als Familie?\nAnna: Schön! Was macht ihr gerne zusammen als Familie?',
 qs:[{q:'Was macht Annas Vater?',a:'Annas Vater ist Ingenieur.'},{q:'Wo studiert Max?',a:'Max studiert in Berlin.'},{q:'Wo wohnen Annas Großeltern?',a:'Annas Großeltern wohnen in Bayern.'}]},
 speaking:['Das ist mein Vater. Er heißt ___.','Meine Mutter heißt ___.','Ich habe ___ Geschwister.','Meine Familie hat ___ Personen.'],
 speakGroups:[
