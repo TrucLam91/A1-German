@@ -40,7 +40,7 @@ vocab:[
 ],
 reading:{title:'Erster Tag im Deutschkurs 🇩🇪',
 text:'Lehrerin: Guten Morgen! Wie heißt du?\nLinh: Guten Morgen! Ich heiße Linh Nguyen. Mein Vorname ist Linh, mein Nachname ist Nguyen.\nLehrerin: Woher kommst du, Linh?\nLinh: : Ich komme aus Vietnam, aber ich wohne jetzt in Berlin.\nLehrerin: Wie alt bist du?\nIch bin 24 Jahre alt. Ich studiere Informatik. Meine Muttersprache ist Vietnamesisch.\nLehrerin: Und deine Hobbys?\nLinh: In meiner Freizeit höre ich Musik und reise gern. Schön, Sie kennenzulernen!',
-qs:[{q:'Woher kommt Linh?',a:'Linh kommt aus Vietnam, aus Ho-Chi-Minh-Stadt.'},{q:'Was studiert Linh?',a:'Linh studiert Informatik.'},{q:'Was sind Linhs Hobbys?',a:'Linh hört Musik und reist gern.'}]},
+qs:[{q:'Woher kommt Linh?',a:'Linh kommt aus Vietnam.'},{q:'Was studiert Linh?',a:'Linh studiert Informatik.'},{q:'Was sind Linhs Hobbys?',a:'Linh hört Musik und reist gern.'}]},
 speaking:['Hallo! Ich heiße ___.','Ich komme aus ___.','Ich wohne in ___.','Ich bin ___ Jahre alt.','Schön, dich kennenzulernen!'],
 speakGroups:[
 {cat:'1. Name 🏷️',items:[{q:'Wie heißen Sie? / Wie heißt du?',a:'Ich heiße ___. / Mein Name ist ___.'},{q:'Können Sie Ihren Namen buchstabieren?',a:'Ja, natürlich: ___.'}]},
@@ -127,7 +127,7 @@ quiz:[
 ]},
 
 {id:3,emoji:'🔢',title:'Zahlen & Datum',sub:'Numbers & Dates',color:'#27ae60',light:'#edfaf1',
-key:'Heute ist der 3. März. Ich bin am 15. August geboren.',ytId:'lVW4a_IVGAo',
+key:'Heute ist der 3. März. Ich bin am 15. August geboren.',ytId:'6iJNdx4FdKE',
 vocab:[
 // 1. Zahlen 1–20
 {de:'eins / eine',vi:'one',ex:'Ich brauche nur ein Zimmer.',cat:'1. Zahlen 1–20 🔢'},
@@ -202,6 +202,34 @@ vocab:[
 {de:'neunzehnhundertneunundneunzig',vi:'1999',ex:'Ich bin 1999 geboren.',cat:'7. Datum & Jahr 📆'},
 {de:'zweitausendvierzehn',vi:'2014',ex:'Das Jahr 2014.',cat:'7. Datum & Jahr 📆'},
 ]},
+reading:{
+  title:'Erstes Date',
+  text:'Max: Hallo Anna! Schön, dich kennenzulernen.\nAnna: Hallo Max! Freut mich auch.\nMax: Sag mal, wie alt bist du? Du siehst sehr jung aus.\nAnna: Danke! Ich bin zweiundzwanzig (22) Jahre alt. Und du?\nMax: Ich bin fünfundzwanzig (25). Wann hast du Geburtstag?\nAnna: Mein Geburtstag ist am siebten Mai (7. Mai). Und deiner?\nMax: Ich habe im Herbst Geburtstag, am zwölften Oktober (12. Oktober). Hast du eigentlich Geschwister?\nAnna: Ja, ich habe zwei Schwestern. Sie sind sechzehn (16) und neunzehn (19) Jahre alt.\nMax: Das ist toll. Du, das Café schließt schon um 20 Uhr. Wollen wir uns am Wochenende wiedersehen?\nAnna: Ja, gern! Am Samstag?\nMax: Samstag ist super. Um halb acht (19:30 Uhr)?\nMax: Samstag ist super. Um halb acht (19:30 Uhr)?\nMax: Klar, meine Nummer ist 0-1-7-6 - 8-3-4 - 5-6 - 9-0.\nAnna: Super, ich rufe dich an! Bis Samstag!',
+  qs:[
+    {q:'Wann ist Anna Geburtstag?',a:'Annas Geburtstag ist am siebten Mai.'},
+    {q:'Wie alt ist Max?',a:'Max ist 25 Jahre alt.'},
+    {q:'Wie viele Geschwister hat Anna?',a:'Anna hat zwei Geschwister.'},
+  ]
+},
+speaking:[
+  'Heute ist der ___ (Datum).',
+  'Ich bin am ___ geboren.',
+  'Es ist ___ Uhr.',
+  'Das kostet ___ Euro.',
+  'Wann ist dein Geburtstag?',
+],
+writing:{
+  task:'Schreib dein Geburtsdatum und einen Termin! ✍️',
+  tmpl:'Ich bin am ___ geboren. Heute ist der ___. Meine Telefonnummer ist ___.',
+  ex:'Ich bin am 5. März 2000 geboren. Heute ist der 20. April. Es ist Montag. Meine Telefonnummer ist 0901234567.',
+},
+quiz:[
+  {q:'How much is 15 + 7?',o:['22','21','23','20'],a:0},
+  {q:'Which day comes after Wednesday?',o:['Dienstag','Donnerstag','Freitag','Montag'],a:1},
+  {q:'Which month comes after July?',o:['Juni','August','September','Oktober'],a:1},
+  {q:'How do you write "20" in German?',o:['zehn','zwanzig','dreißig','zwölf'],a:1},
+  {q:'What does "Geburtstag" mean?',o:['birthday','date','Monday','June'],a:0},
+]},
 
 {id:4,emoji:'🍕',title:'Essen & Trinken',sub:'Food & Drinks',color:'#f39c12',light:'#fefbf0',
 key:'Ich möchte einen Kaffee, bitte. Was kostet das Schnitzel?',ytId:'LcJKlry_UV4',
@@ -269,7 +297,7 @@ vocab:[
 ],
 reading:{title:'Im Restaurant 🍽️',
 text:'Lukas: Hallo Mia! Hast du Hunger? Wir können etwas essen gehen.\nMia: Hallo Lukas! Ja, gern. Was isst du denn am liebsten?\nLukas: Ich esse sehr gern Hamburger mit Pommes. Und du? Magst du auch Hamburger?\nMia: Nein, Fleisch esse ich nicht. Ich esse lieber Nudeln mit Tomatensoße. Das ist mein Lieblingsessen!\nLukas: Nudeln finde ich auch gut. Und was trinkst du? Cola?\nMia: Nein, Cola ist mir zu süß. Ich trinke Apfelsaft oder Wasser.\nLukas: Okay, super! Dann gehen wir!',
-qs:[{q:'Was kostet das Schnitzel?',a:'Das Schnitzel kostet 14 Euro.'},{q:'Was möchte der Kunde trinken?',a:'Der Kunde möchte ein Wasser.'},{q:'Was nimmt der Kunde?',a:'Der Kunde nimmt das Schnitzel.'}]},
+qs:[{q:'Was isst Lukas am liebsten?',a:'Er isst sehr gern Hamburger mit Pommes.'},{q:'Was möchtet Mia trinken?',a:'Sie möchtet Apfelsaft oder Wasser.'},{q:'Mag Mia Fleisch?',a:'Nein, Fleisch isst sie nicht.'}]},
 speaking:['Ich möchte ___, bitte.','Was kostet ___?','Das schmeckt sehr lecker!','Die Rechnung, bitte!'],
 writing:{task:'Was isst du zum Frühstück? ✍️',tmpl:'Zum Frühstück esse ich ___. Ich trinke ___.',ex:'Zum Frühstück esse ich Brot mit Butter. Ich trinke Kaffee mit Milch. Das ist sehr lecker!'},
 quiz:[
