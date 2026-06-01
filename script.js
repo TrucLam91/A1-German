@@ -293,7 +293,7 @@ quiz:[
 ]},
 
 {id:5,emoji:'🏠',title:'Wohnen',sub:'Housing',color:'#1abc9c',light:'#edfaf7',
-key:'Ich wohne in einer Wohnung. Sie hat 3 Zimmer, eine Küche und ein Bad.',ytId:'g1AQMJB0nRw',
+key:'Ich wohne in einer Wohnung. Sie hat 3 Zimmer, eine Küche und ein Bad.',ytId:'rNJDf8eAxx4',
 vocab:[
 {de:'die Wohnung (-en)',vi:'apartment',ex:'Meine Wohnung ist groß.'},
 {de:'das Haus (Häuser)',vi:'house',ex:'Wir wohnen in einem Haus.'},
@@ -307,8 +307,8 @@ vocab:[
 {de:'im Erdgeschoss',vi:'on the ground floor',ex:'Ich wohne im Erdgeschoss.'},
 ],
 reading:{title:'Luises neue Wohnung 🏡',
-text:'Luise hat eine neue Wohnung in München. Sie hat drei Zimmer: ein Schlafzimmer, ein Wohnzimmer und ein Arbeitszimmer. Die Wohnung ist 65 Quadratmeter groß. Die Miete ist 1.200 Euro pro Monat.',
-qs:[{q:'Wie viele Zimmer hat die Wohnung?',a:'Die Wohnung hat drei Zimmer.'},{q:'Wie groß ist die Wohnung?',a:'Die Wohnung hat 65 Quadratmeter.'},{q:'Wie teuer ist die Miete?',a:'Die Miete ist 1.200 Euro pro Monat.'}]},
+text:'Anna: Hallo Dave! Wie geht es dir? Wohnst du jetzt in München?\nHallo Dave! Wie geht es dir? Wohnst du jetzt in München?\nAnna: Super! Wie groß ist die Wohnung denn?\nDave: Sie ist nicht groß. Ich habe ein Wohnzimmer, ein Schlafzimmer und ein Arbeitszimmer. Es gibt auch eine schöne Küche, ein Bad.\nAnna: Deine Wohnung ist sehr gemütlich. Hast du auch neue Möbel?\nDave: Ja, im Wohnzimmer steht ein neues Sofa. Und im Arbeitszimmer steht mein Schreibtisch mit dem Computer.\nAnna: Und wie viel kostet die Wohnung?\nDave: Die Monatsmiete kostet 1.200 Euro. Das ist nicht billig, aber die Wohnung liegt im Stadtzentrum und ist sehr ruhig.',
+qs:[{q:'Wie viele Zimmer hat die Wohnung?',a:'Die Wohnung hat drei Zimmer.'},{q:'Wie groß ist die Wohnung?',a:'Die Wohnung ist nicht groß.'},{q:'Wie teuer ist die Miete?',a:'Die Miete ist 1.200 Euro pro Monat.'}]},
 speaking:['Ich wohne in einer ___.','Die Wohnung hat ___ Zimmer.','Die Miete kostet ___ Euro.','Ich wohne im ___ Stock.'],
 writing:{task:'Beschreib deine Wohnung! ✍️',tmpl:'Ich wohne in ___. Meine Wohnung hat ___.',ex:'Ich wohne in einer Wohnung. Meine Wohnung hat 2 Zimmer, eine Küche und ein Bad.'},
 quiz:[
